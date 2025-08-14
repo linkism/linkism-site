@@ -2221,7 +2221,7 @@ export default function LinkismProtocolSpec() {
             <span className="font-mono text-green-600 dark:text-green-400">RFC Suite v1.0</span>
             <span className="text-zinc-400"> Aug 2025</span>
             <a
-              href="/linkism-protocol-suite.pdf"
+              href="/linkism-protocol-spec.pdf"
               className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:underline decoration-dotted"
               target="_blank"
               rel="noopener noreferrer"

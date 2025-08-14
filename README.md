@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Linkism Site
 
-## Getting Started
+> 🌐 **Official website for the Linkism Protocol Suite**  
+> [linkism.org](https://linkism.org) — A persistent identity layer for the world’s UI
 
-First, run the development server:
+---
+
+## Overview
+
+This repository powers [**linkism.org**](https://linkism.org), the canonical reference site for the Linkism Protocol — a specification suite for resilient, cryptographically-verifiable UI element selectors.
+
+The site renders:
+
+- 📘 Full RFC Suite:  
+  - [RFC-001] LID URI Specification  
+  - [RFC-002] SCR Bundle Format  
+  - [RFC-003] Resolution Protocol  
+  - [BCP-001] Deployment Guidelines
+
+- 🧪 Reference Implementation  
+- 🛠 Quickstart CLI Docs  
+- 📄 Downloadable PDFs  
+- 🧵 Future discussions + integration guides
+
+---
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) 15  
+- **Styling**: Tailwind CSS + MDX  
+- **Deployment**: [Vercel](https://vercel.com/)  
+- **PDF Output**: RFCs rendered server-side via MD-to-PDF pipeline  
+- **Dark Mode**: System preference + toggle-ready  
+
+---
+
+## Local Development
 
 ```bash
+git clone https://github.com/linkism/linkism-site.git
+cd linkism-site
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then visit http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+File Structure
 
-To learn more about Next.js, take a look at the following resources:
+.
+├── src/
+│   ├── app/             # Next.js 15 routing
+│   ├── components/      # Custom React components
+│   ├── data/            # RFC content and metadata
+│   └── styles/          # Tailwind config and globals
+├── public/              # Static PDFs, images, favicon
+├── linkism-protocol-suite.pdf
+└── README.md
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deployment is handled via Vercel:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Production: pushed to main → linkism.org
+
+Preview: PRs automatically get Vercel preview URLs
+
+
+No manual deploy steps needed if connected to GitHub.
+
+
+---
+
+Contributing
+
+All contributions to the site layout, component styling, or RFC presentation can be submitted as pull requests.
+
+RFC content lives in linkism-protocol and is imported as Markdown from there.
+
+
+---
+
+License
+
+All content is published under CC BY-SA 4.0
+Open specification. Royalty-free. Protocol-first.
+
+
+---
+
+Maintainer
+
+Joel D. Trout II
+Author of the Linkism Protocol
+@ziolndr · linkism.org

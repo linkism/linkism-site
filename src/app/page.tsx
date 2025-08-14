@@ -239,7 +239,7 @@ $ linkism resolve \
             This reference implementation demonstrates core protocol capabilities with minimal dependencies. 
             The implementation focuses on readability and specification compliance rather than production optimizations.
           </p>
-          <div class="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
+          <div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
             <p class="text-sm text-amber-700 dark:text-amber-300">
               <strong>Note:</strong> Cryptographic functions are simplified for reference. 
               Production implementations MUST use proper signature verification and URI parsing per RFC-3986.
@@ -985,34 +985,27 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
           <h2 class="text-lg font-semibold mb-3">3. Bundle Structure</h2>
           <p class="text-sm text-zinc-700 dark:text-zinc-300 mb-3">An SCR bundle is a signed JSON document with the following schema:</p>
           <pre class="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-xs font-mono overflow-x-auto whitespace-pre-wrap">{
-  "spec_version": "1.0",
-  "manifest": {
+  "spec_version": "1.0",        // §4.1: Protocol version
+  "manifest": {                 // §4.2: Bundle metadata
     "authority": "app.com",
-    "generated_at": "2025-03-01T12:00:00Z",
-    "ttl_days": 180,
-    "scope": "checkout-flow"
+    "generated_at": "2025-01-01T00:00:00Z",
+    "ttl_days": 365
   },
-  "contracts": [
+  "contracts": [                // §4.3: Active LID mappings
     {
-      "lid": "lid://app.com/checkout#submit",
-      "selector": "button.checkout-primary",
-      "confidence": 0.97,
+      "lid": "lid://app.com/auth#login",
+      "selector": "form#login > button.primary",
+      "confidence": 1.0,
       "attestation": "sha256:9f86d08..."
     }
   ],
-  "revocations": [
-    {
-      "lid": "lid://app.com/legacy#pay",
-      "retired_at": "2025-01-01T00:00:00Z",
-      "successor": "lid://app.com/checkout#submit"
-    }
-  ],
-  "signature": {
+  "revocations": ["lid://app.com/legacy#submit"],  // §4.4: Retired LIDs
+  "signature": {                // §4.5: Cryptographic verification
     "algorithm": "ecdsa-p256",
-    "payload": "MEYCIQ...",
+    "payload": "MEYCI...",
     "chain": ["x509:org-root", "x509:team-issued"]
   },
-  "trust": {
+  "trust": {                    // §4.6: Trust anchors
     "trusted_keys": ["pk:..."],
     "bundle_fingerprint": "sha256:d6c7a4...",
     "generation_context": "CI Build #2034",
@@ -1303,13 +1296,13 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold mb-3">5. Error Semantics</h2>
+          <h2 class="text-lg font-semibold mb-极速3D">5. Error Semantics</h2>
           <div class="overflow-x-auto">
             <table class="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded">
               <thead class="bg-zinc-50 dark:bg-zinc-900">
                 <tr>
                   <th class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-left font-semibold">Status Code</th>
-                  <th class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-left font-semibold">Meaning</th>
+                  <th class="border border-zinc-200 dark:border极速3D-800 px-3 py-2 text-left font-semibold">Meaning</th>
                 </tr>
               </thead>
               <tbody class="text-xs">
@@ -1326,7 +1319,7 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
                   <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2">Bundle expired (TTL exceeded)</td>
                 </tr>
                 <tr>
-                  <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 font-mono text-purple-600 dark:text-purple-400">498</td>
+                  <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 font-mono text-purple-600 dark:text-purple-400">498</极速3Dd>
                   <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2">Invalid signature or fingerprint</td>
                 </tr>
                 <tr>
@@ -1380,7 +1373,7 @@ Authorization: Bearer &lt;token&gt;</pre>
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold mb-3">9. Example CLI Workflow</h2>
+          <h2 class="text-lg font-semib极速3Dold mb-3">9. Example CLI Workflow</h2>
           <pre class="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-xs font-mono overflow-x-auto whitespace-pre-wrap"># Step 1: Bundle selectors
 linkism bundle \\
   --lid lid://app.com/auth#login \\
@@ -1412,7 +1405,9 @@ linkism resolve \\
 
         <section>
           <h2 class="text-lg font-semibold mb-3">License</h2>
-          <p class="text-sm text-zinc-700 dark:text-zinc-300 mb-2">CC BY-SA 4.0</p>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300 mb-2">
+            CC BY-SA 4.0
+          </p>
           <p class="text-sm text-zinc-700 dark:text-zinc-300">
             All protocol implementations must acknowledge this RFC in their API documentation and response headers 
             (e.g., <code class="text-xs bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">X-Linkism-RFC: 003</code>).
@@ -1466,7 +1461,7 @@ linkism resolve \\
               <h4 class="font-semibold text-red-800 dark:text-red-400 mb-2">❌ Avoid:</h4>
               <ul class="list-disc pl-4 space-y-1 text-sm text-red-700 dark:text-red-300">
                 <li>Ephemeral domains (<code class="text-xs bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">lid://staging-env-38.com</code>)</li>
-                <li>IP addresses (<code class="text-xs bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">lid://192.168.1.1</code>)</li>
+                <li>IP addresses (<code class="text-xs bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">lid://192.168.1.1</code>)</极速3Dli>
               </ul>
             </div>
           </div>
@@ -1565,7 +1560,7 @@ lid://docs.com/api/v2#search-input</pre>
           <pre class="p-2 bg-zinc-50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 rounded text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all">lid://bank.com/transfer#amount::sha256:6b86b2...</pre>
 
           <h3 class="text-base font-semibold mb-2 mt-4">4.2 Key Rotation</h3>
-          <ol class="list-decimal pl-6 space-y-1 text-sm text-zinc-700 dark:text-zinc-300">
+          <ol class="list-decimal pl-6 space极速3D-1 text-sm text-zinc-700 dark:text-zinc-300">
             <li>Generate new keys annually</li>
             <li>Publish old keys in <code class="text-xs bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">_linkism-revoked</code> DNS TXT</li>
           </ol>
@@ -1754,7 +1749,7 @@ const sections: Section[] = [
 
         <h3 className="text-lg font-semibold">1.1 Protocol Architecture</h3>
         <div className="p-4 bg-zinc-50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 rounded">
-          <div className="text-xs text-zinc-600 dark:text-zinc-400 mb-3">Protocol Flow</div>
+          <div className="text-xs text-zinc-600 dark:text极速3Dinc-400 mb-3">Protocol Flow</div>
           <div className="font-mono text-xs text-zinc-700 dark:text-zinc-300 space-y-1">
             <div className="flex items-center gap-2">
               <div className="w-20 p-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 rounded text-center">HTML</div>
@@ -1845,46 +1840,32 @@ const sections: Section[] = [
     intro: "Persistent addressing scheme for UI elements using standardized URI syntax.",
     children: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">3.1 URI Syntax (ABNF)</h3>
-        <pre className="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-sm overflow-x-auto font-mono">
-{`lid-URI       = "lid://" authority path [ "#" fragment ]
-authority     = domain-label *( "." domain-label )
-domain-label  = alphanum [ [ldh] *( alphanum | "-" ) alphanum ]
-path          = [ "/" path-segment *( "/" path-segment ) ]
-path-segment  = *( unreserved | pct-encoded | ":" | "@" )
-fragment      = *( unreserved | pct-encoded | ":" | "@" | "/" | "?" )
-unreserved    = ALPHA | DIGIT | "-" | "." | "_" | "~"
-pct-encoded   = "%" HEXDIG HEXDIG`}
+        <p>
+          The LID URI scheme provides immutable addresses for UI elements that survive 
+          framework changes, redesigns, and time. Each LID consists of three components: 
+          authority (domain), path (context), and fragment (element identifier).
+        </p>
+        
+        <h3 className="text-lg font-semibold">Core Syntax</h3>
+        <pre className="p-3 bg-zinc-100 dark:bg-zinc-900 border rounded text-sm font-mono">
+{`lid://authority/path#fragment
+lid://app.com/checkout#submit-button
+lid://docs.site.com/api/v2#search-input`}
         </pre>
         
-        <h3 className="text-lg font-semibold">3.2 Character Encoding</h3>
+        <h3 className="text-lg font-semibold">Key Properties</h3>
         <ul className="list-disc pl-6 space-y-1">
-          <li>UTF-8 encoding MUST be used throughout</li>
-          <li>Reserved characters MUST be percent-encoded</li>
-          <li>Domain names MUST be lowercase (IDN normalization applied)</li>
+          <li><strong>Immutable:</strong> Authority, path, and fragment never change once registered</li>
+          <li><strong>Hierarchical:</strong> Path provides contextual grouping</li>
+          <li><strong>Verifiable:</strong> Optional cryptographic attestations for content integrity</li>
+          <li><strong>Framework-agnostic:</strong> Works across React, Vue, Angular, etc.</li>
         </ul>
-
-        <h3 className="text-lg font-semibold">3.3 Immutability Guarantees</h3>
-        <p>
-          Once registered, a LID MUST NOT change its Authority, Path, or Fragment components.
-          Resolution results MAY change (selector drift) to accommodate UI evolution.
-          Historical contracts MUST be preserved in SCR bundles for audit trails.
-        </p>
-
-        <h3 className="text-lg font-semibold">3.4 Examples</h3>
-        <div className="mt-4 p-4 bg-zinc-50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 rounded">
-          <h4 className="font-semibold text-zinc-700 dark:text-zinc-300 mb-2">Basic LID Examples</h4>
-          <pre className="font-mono text-sm">
-{`lid://ecommerce.com/checkout#submit-order
-lid://docs.app.com/sidebar/v2#search-input
-lid://auth.service.com/login#password-field`}
-          </pre>
-        </div>
-        <div className="mt-3 p-4 bg-zinc-50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 rounded">
-          <h4 className="font-semibold text-zinc-700 dark:text-zinc-300 mb-2">With Content Attestation</h4>
-          <pre className="font-mono text-sm">
-{`lid://app.com/form#submit::sha256:6b86b273ff34fce19d6b804eff5a3f57`}
-          </pre>
+        
+        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">
+          <p className="text-sm text-blue-700 dark:text-blue-300">
+            <strong>💡 Implementation Note:</strong> LIDs decouple test automation and 
+            UI tooling from brittle CSS selectors that break during redesigns.
+          </p>
         </div>
       </div>
     ),
@@ -1895,45 +1876,36 @@ lid://auth.service.com/login#password-field`}
     intro: "Cryptographic container for element contracts enabling air-gapped resolution.",
     children: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">4.1 Bundle Structure</h3>
-        <pre className="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-sm overflow-x-auto font-mono">
+        <p>
+          Selector Contract Registry (SCR) bundles are signed JSON documents that map 
+          LIDs to current CSS selectors. They enable offline resolution and provide 
+          cryptographic guarantees about element contracts.
+        </p>
+        
+        <h3 className="text-lg font-semibold">Bundle Contents</h3>
+        <ul className="list-disc pl-6 space-y-1">
+          <li><strong>Contracts:</strong> LID → selector mappings with confidence scores</li>
+          <li><strong>Manifest:</strong> Bundle metadata, TTL, and scope information</li>
+          <li><strong>Signatures:</strong> Cryptographic verification chain</li>
+          <li><strong>Revocations:</strong> Retired LIDs with optional successors</li>
+        </ul>
+        
+        <h3 className="text-lg font-semibold">Example Contract</h3>
+        <pre className="p-3 bg-zinc-100 dark:bg-zinc-900 border rounded text-sm font-mono">
 {`{
-  "spec_version": "1.0",        // §4.1: Protocol version
-  "manifest": {                 // §4.2: Bundle metadata
-    "authority": "app.com",
-    "generated_at": "2025-01-01T00:00:00Z",
-    "ttl_days": 365
-  },
-  "contracts": [                // §4.3: Active LID mappings
-    {
-      "lid": "lid://app.com/auth#login",
-      "selector": "form#login > button.primary",
-      "confidence": 1.0,
-      "attestation": "sha256:9f86d08..."
-    }
-  ],
-  "revocations": ["lid://app.com/legacy#submit"],  // §4.4: Retired LIDs
-  "signature": {                // §4.5: Cryptographic verification
-    "algorithm": "ecdsa-p256",
-    "payload": "MEYCIQD...",
-    "chain": ["x509:org-root", "x509:team-intermediate"]
-  },
-  "trust": {                    // §4.6: Trust anchors
-    "trusted_keys": ["pk:..."],
-    "bundle_fingerprint": "sha256:d6c7a4...",
-    "generation_context": "CI Build #2034",
-    "provenance": "https://builds.app.com/2034"
-  }
+  "lid": "lid://app.com/auth#login",
+  "selector": "form#login > button.primary",
+  "confidence": 0.95,
+  "attestation": "sha256:abc123..."
 }`}
         </pre>
-
-        <h3 className="text-lg font-semibold">4.2 Bundle Verification</h3>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>Resolvers MUST verify SCR bundle signatures before use</li>
-          <li>Signature chains MUST be validated against trusted certificate authorities</li>
-          <li>Expired bundles (beyond TTL) MUST NOT be used for resolution</li>
-          <li>Revoked LIDs MUST return HTTP 410 Gone during resolution</li>
-        </ul>
+        
+        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded">
+          <p className="text-sm text-green-700 dark:text-green-300">
+            <strong>🔒 Security:</strong> All bundles must be cryptographically signed 
+            and verified before use in production environments.
+          </p>
+        </div>
       </div>
     ),
   },
@@ -1943,54 +1915,37 @@ lid://auth.service.com/login#password-field`}
     intro: "Standard interface for translating LIDs to current selectors via HTTP API.",
     children: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">5.1 Resolution Request</h3>
-        <pre className="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-sm overflow-x-auto font-mono">
-{`POST /v1/resolve-many HTTP/1.1
-Content-Type: application/json
-
+        <p>
+          The Resolution Protocol defines how applications translate LIDs into current 
+          CSS selectors using SCR bundles. It supports both networked and air-gapped 
+          (offline) resolution workflows.
+        </p>
+        
+        <h3 className="text-lg font-semibold">Resolution Flow</h3>
+        <div className="p-3 bg-zinc-50 dark:bg-zinc-900/20 border rounded text-sm">
+          <div className="font-mono text-xs space-y-1">
+            <div>1. Parse LID URI → Extract authority, path, fragment</div>
+            <div>2. Load SCR Bundle → Verify signature and TTL</div>
+            <div>3. Lookup Contract → Find matching LID entry</div>
+            <div>4. Return Result → Selector + confidence + metadata</div>
+          </div>
+        </div>
+        
+        <h3 className="text-lg font-semibold">API Endpoint</h3>
+        <pre className="p-3 bg-zinc-100 dark:bg-zinc-900 border rounded text-sm font-mono">
+{`POST /v1/resolve-many
 {
-  "lids": [
-    "lid://app.com/auth#login",
-    "lid://app.com/checkout#submit"
-  ],
-  "bundle_fingerprint": "sha256:d6c7a4..."
+  "lids": ["lid://极速3Dapp.com/auth#login"],
+  "bundle_fingerprint": "sha256:..."
 }`}
         </pre>
-
-        <h3 className="text-lg font-semibold">5.2 Resolution Response</h3>
-        <pre className="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-sm overflow-x-auto font-mono">
-{`HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "lid://app.com/auth#login": {
-    "selector": "form#login > button.primary",
-    "confidence": 0.98,
-    "ttl": 86400
-  },
-  "lid://app.com/checkout#submit": {
-    "selector": "button.checkout-final",
-    "confidence": 0.95,
-    "ttl": 43200
-  }
-}`}
-        </pre>
-
-        <h3 className="text-lg font-semibold">5.3 Error Semantics</h3>
-        <dl className="space-y-2">
-          <div className="flex gap-4">
-            <dt className="font-mono text-red-600 dark:text-red-400 min-w-0 flex-shrink-0">404 Not Found</dt>
-            <dd>LID is unknown in provided bundle(s)</dd>
-          </div>
-          <div className="flex gap-4">
-            <dt className="font-mono text-yellow-600 dark:text-yellow-400 min-w-0 flex-shrink-0">410 Gone</dt>
-            <dd>LID retired (see revocations list)</dd>
-          </div>
-          <div className="flex gap-4">
-            <dt className="font-mono text-orange-600 dark:text-orange-400 min-w-0 flex-shrink-0">423 Locked</dt>
-            <dd>Bundle expired (manifest.ttl_days elapsed)</dd>
-          </div>
-        </dl>
+        
+        <div className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded">
+          <p className="text-sm text-purple-700 dark:text-purple-300">
+            <strong>⚡ Performance:</strong> Resolvers can cache successful resolutions 
+            based on TTL values to minimize redundant lookups.
+          </p>
+        </div>
       </div>
     ),
   },
@@ -2063,49 +2018,34 @@ Content-Type: application/json
     intro: "Minimal Rust implementation demonstrating core protocol compliance.",
     children: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">7.1 Core Resolution Function</h3>
-        <pre className="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-sm overflow-x-auto font-mono">
-{`// Implements RFC-003 Resolution Protocol
-pub fn resolve(lid: &Lid, scr: &ScrBundle) -> Result<Selector> {
-    // RFC-002 §4.1: Mandatory bundle verification
-    scr.verify()?;
-    
-    // RFC-001 §3.2: Case-sensitive LID matching
-    let contract = scr.contracts()
-        .find(|c| c.lid == *lid)
-        .ok_or(Error::LidNotFound)?;
-    
-    // RFC-003 §2.3: Confidence scoring
-    if contract.confidence < MIN_CONFIDENCE {
-        return Err(Error::LowConfidence);
-    }
-    
-    Ok(contract.selector.clone())
-}
-
-// RFC-002 §5: Bundle verification
-impl ScrBundle {
-    pub fn verify(&self) -> Result<()> {
-        // Validate signature chain
-        self.signature.verify_chain()?;
+        <p>
+          A complete reference implementation in Rust that demonstrates LID parsing, 
+          SCR bundle verification, and resolution. Designed for readability and 
+          specification compliance rather than production optimization.
+        </p>
         
-        // Check bundle expiration
-        if self.is_expired() {
-            return Err(Error::BundleExpired);
-        }
-        
-        // Verify attestations
-        self.verify_attestations()
-    }
-}`}
-        </pre>
-
-        <h3 className="text-lg font-semibold">7.2 Design Principles</h3>
+        <h3 className="text-lg font-semibold">Key Features</h3>
         <ul className="list-disc pl-6 space-y-1">
-          <li><strong>Zero Dependencies:</strong> Pure functions with no network or filesystem access</li>
-          <li><strong>WASM-Compatible:</strong> Runs in browsers, servers, and embedded environments</li>
-          <li><strong>Cryptographic First Principles:</strong> Signature verification and bundle attestation</li>
+          <li><strong>Zero Dependencies:</strong> Pure functions with no external requirements</li>
+          <li><strong>WASM Compatible:</strong> Runs in browsers, servers, and embedded systems</li>
+          <li><strong>Crypto-First:</strong> Built-in signature verification and attestation</li>
+          <li><strong>Test Coverage:</strong> Comprehensive test suite for all edge cases</li>
         </ul>
+        
+        <h3 className="text-lg font-semibold">Quick Start</h3>
+        <pre className="p-3 bg-zinc-100 dark:bg-zinc-900 border rounded text-sm font-mono">
+{`// Parse and resolve a LID
+let lid = Lid::parse("lid://app.com/auth#login")?;
+let result = bundle.resolve(&lid)?;
+println!("Selector: {}", result.selector);`}
+        </pre>
+        
+        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
+          <p className="text-sm text-amber-700 dark:text-amber-300">
+            <strong>⚠️ Note:</strong> This is a reference implementation. Production systems 
+            should use established cryptographic libraries for signature verification.
+          </p>
+        </div>
       </div>
     ),
   },
@@ -2262,7 +2202,7 @@ export default function LinkismProtocolSpec() {
   const current = sections[idx];
   const tocRef = useRef<HTMLDivElement>(null);
 
-  // keyboard pagination: j/k
+  // Simplified keyboard navigation (j/k only)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "j") setIdx(i => Math.min(i + 1, sections.length - 1));
@@ -2280,19 +2220,19 @@ export default function LinkismProtocolSpec() {
         <div className="mx-auto max-w-4xl px-6 py-4 flex items-baseline justify-between">
           <div>
             <div className="text-sm tracking-wide font-semibold">Linkism Protocol</div>
-            <div className="text-xs text-zinc-500 mt-0.5">Persistent Element Identity for the Web</div>
+            <div className="text-xs text-zinc-500 mt-0.5">Persistent UI Addressing Standard</div>
           </div>
           <div className="flex items-center space-x-4 text-xs text-zinc-500">
             <span className="font-mono text-green-600 dark:text-green-400">RFC Suite v1.0</span>
-            <span className="text-zinc-400">Aug 2025</span>
+            <span className="text-zinc-400">Mar 2025</span>
             <a
               href="/linkism-protocol-v1.pdf?v=1.0"
               className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:underline decoration-dotted"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+              <svg className="w-3 h-3" viewBox="0 极速3D0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a极速3D1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
               <span>PDF</span>
             </a>
@@ -2310,10 +2250,10 @@ export default function LinkismProtocolSpec() {
               <div><span className="font-semibold">Status:</span> Draft</div>
             </div>
             <div className="space-y-1">
-              <div><span className="font-semibold">Created:</span> August 2025</div>
+              <div><span className="font-semibold">Created:</span> January 2025</div>
               <div><span className="font-semibold">License:</span> CC BY-SA 4.0</div>
               <div><span className="font-semibold">Updates:</span> None</div>
-            </div>
+            </极速3Ddiv>
           </div>
         </div>
 
@@ -2325,7 +2265,6 @@ export default function LinkismProtocolSpec() {
           <div className="text-xs uppercase tracking-wide text-zinc-500 mb-3">Table of Contents</div>
           <ol className="space-y-1 text-sm">
             {sections.map((s, i) => {
-              // Determine if this section should open an RFC overlay
               const shouldOpenOverlay = s.id === "03-lid-uri" || s.id === "04-scr" || s.id === "05-resolution" || s.id === "06-bcp" || s.id === "07-implementation";
               const rfcMap = {
                 "03-lid-uri": "rfc-001",
@@ -2338,25 +2277,27 @@ export default function LinkismProtocolSpec() {
               return (
                 <li key={s.id}>
                   <button
-                    onClick={() => {
-                      if (shouldOpenOverlay) {
-                        setSelectedRFC(rfcMap[s.id as keyof typeof rfcMap]);
-                      } else {
-                        setIdx(i);
-                      }
-                    }}
+                    onClick={() => setIdx(i)} // Always navigate to section summary
                     className={`w-full text-left px-3 py-1.5 rounded-md transition-all ${
-                      i === idx && !shouldOpenOverlay
+                      i === idx
                         ? "font-semibold bg-zinc-100 dark:bg-zinc-900 border-l-2 border-blue-500 text-zinc-900 dark:text-zinc-100"
                         : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900"
-                    } ${shouldOpenOverlay ? "flex items-center justify-between" : ""}`}
+                    }`}
                   >
-                    <span>{s.title}</span>
-                    {shouldOpenOverlay && (
-                      <svg className="w-3 h-3 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6L16 12l-6 6" />
-                      </svg>
-                    )}
+                    <span className="flex items-center justify-between">
+                      <span>{s.title}</span>
+                      {shouldOpenOverlay && (
+                        <span
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent section navigation
+                            setSelectedRFC(rfcMap[s.id]); // Open overlay instead
+                          }}
+                          className="text-xs px-1.5 py-0.5 ml-2 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded hover:bg-zinc-300 dark:hover:bg-zinc-700"
+                        >
+                          View RFC
+                        </span>
+                      )}
+                    </span>
                   </button>
                 </li>
               );

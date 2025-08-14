@@ -2266,7 +2266,7 @@ export default function LinkismProtocolSpec() {
           <ol className="space-y-1 text-sm">
             {sections.map((s, i) => {
               const shouldOpenOverlay = s.id === "03-lid-uri" || s.id === "04-scr" || s.id === "05-resolution" || s.id === "06-bcp" || s.id === "07-implementation";
-              const rfcMap = {
+              const rfcMap: Record<RfcMapKeys, string> = {
                 "03-lid-uri": "rfc-001",
                 "04-scr": "rfc-002", 
                 "05-resolution": "rfc-003",
@@ -2290,7 +2290,7 @@ export default function LinkismProtocolSpec() {
                         <span
                           onClick={(e) => {
                             e.stopPropagation(); // Prevent section navigation
-                            setSelectedRFC(rfcMap[s.id]); // Open overlay instead
+                            setSelectedRFC(rfcMap[s.id as keyof typeof rfcMap]); // Open overlay instead
                           }}
                           className="text-xs px-1.5 py-0.5 ml-2 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded hover:bg-zinc-300 dark:hover:bg-zinc-700"
                         >

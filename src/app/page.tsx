@@ -2,11 +2,10 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 
 // RFC Content from the actual documents
-const rfcContent: Record<string, { title: string; status: string; html: string; pdf: string }> = {
+const rfcContent: Record<string, { title: string; status: string; html: string }> = {
   "rfc-001": {
     title: "RFC-001 · LID URI Specification",
     status: "stable",
-    pdf: "/docs/lid-rfc-001.pdf",
     html: `
       <div class="space-y-6">
         <div class="border-b border-zinc-200 dark:border-zinc-800 pb-4">
@@ -220,7 +219,6 @@ $ linkism resolve \
   "reference-impl": {
     title: "Reference Implementation · Rust Module",
     status: "stable",
-    pdf: "/docs/linkism-reference-impl.pdf?v=1.0",
     html: `
       <div class="space-y-6">
         <div class="border-b border-zinc-200 dark:border-zinc-800 pb-4">
@@ -899,8 +897,7 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
   },
   "rfc-002": {
     title: "RFC-002 · SCR Bundle Format",
-    status: "stable", 
-    pdf: "/docs/lid-rfc-002.pdf",
+    status: "stable",
     html: `
       <div class="space-y-6">
         <div class="border-b border-zinc-200 dark:border-zinc-800 pb-4">
@@ -1188,7 +1185,6 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
   "rfc-003": {
     title: "RFC-003 · Resolution Protocol",
     status: "draft",
-    pdf: "/docs/lid-rfc-003.pdf", 
     html: `
       <div class="space-y-6">
         <div class="border-b border-zinc-200 dark:border-zinc-800 pb-4">
@@ -1419,7 +1415,6 @@ linkism resolve \\
   "bcp-001": {
     title: "BCP-001 · Deployment Guidelines", 
     status: "stable",
-    pdf: "/docs/bcp-lid-001.pdf",
     html: `
       <div class="space-y-6">
         <div class="border-b border-zinc-200 dark:border-zinc-800 pb-4">
@@ -2145,12 +2140,12 @@ function SpecDrawer({ open, onClose, rfc }: { open: boolean; onClose: () => void
               </div>
               <div className="flex items-center gap-4">
                 <a
-                  href={`${content.pdf}?v=1.0`}
+                 href="/linkism-protocol-suite.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-blue-600 dark:text-blue-400 hover:underline decoration-dotted"
                 >
-                  Download PDF
+                  Download Full Protocol (PDF)
                 </a>
                 <button
                   onClick={onClose}
@@ -2224,9 +2219,9 @@ export default function LinkismProtocolSpec() {
           </div>
           <div className="flex items-center space-x-4 text-xs text-zinc-500">
             <span className="font-mono text-green-600 dark:text-green-400">RFC Suite v1.0</span>
-            <span className="text-zinc-400">Mar 2025</span>
+            <span className="text-zinc-400"> Aug 2025</span>
             <a
-              href="/linkism-protocol-v1.pdf?v=1.0"
+              href="/linkism-protocol-suite.pdf"
               className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:underline decoration-dotted"
               target="_blank"
               rel="noopener noreferrer"
@@ -2234,7 +2229,7 @@ export default function LinkismProtocolSpec() {
               <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
-              <span>PDF</span>
+              <span>Download Full Protocol (PDF)</span>
             </a>
           </div>
         </div>

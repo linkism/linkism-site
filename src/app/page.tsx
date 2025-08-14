@@ -2340,7 +2340,7 @@ export default function LinkismProtocolSpec() {
                   <button
                     onClick={() => {
                       if (shouldOpenOverlay) {
-                        setSelectedRFC(rfcMap[s.id]);
+                        setSelectedRFC(rfcMap[s.id as keyof typeof rfcMap]);
                       } else {
                         setIdx(i);
                       }

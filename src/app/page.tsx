@@ -2280,7 +2280,7 @@ export default function LinkismProtocolSpec() {
         <div className="mx-auto max-w-4xl px-6 py-4 flex items-baseline justify-between">
           <div>
             <div className="text-sm tracking-wide font-semibold">Linkism Protocol</div>
-            <div className="text-xs text-zinc-500 mt-0.5">Persistent UI Addressing Standard</div>
+            <div className="text-xs text-zinc-500 mt-0.5"></div>
           </div>
           <div className="flex items-center space-x-4 text-xs text-zinc-500">
             <span className="font-mono text-green-600 dark:text-green-400">RFC Suite v1.0</span>

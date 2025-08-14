@@ -2140,7 +2140,7 @@ function SpecDrawer({ open, onClose, rfc }: { open: boolean; onClose: () => void
               </div>
               <div className="flex items-center gap-4">
                 <a
-                 href="/linkism-protocol-suite.pdf"
+                 href="/linkism-protocol-spec.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-blue-600 dark:text-blue-400 hover:underline decoration-dotted"
@@ -2272,7 +2272,7 @@ export default function LinkismProtocolSpec() {
               return (
                 <li key={s.id}>
                   <button
-                    onClick={() => setIdx(i)} // Always navigate to section summary
+                    onClick={() => setIdx(i)}
                     className={`w-full text-left px-3 py-1.5 rounded-md transition-all ${
                       i === idx
                         ? "font-semibold bg-zinc-100 dark:bg-zinc-900 border-l-2 border-blue-500 text-zinc-900 dark:text-zinc-100"

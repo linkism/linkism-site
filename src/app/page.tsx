@@ -1296,13 +1296,13 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
         </section>
 
         <section>
-          <h2 class="text-lg font-semibold mb-极速3D">5. Error Semantics</h2>
+          <h2 class="text-lg font-semibold mb-">5. Error Semantics</h2>
           <div class="overflow-x-auto">
             <table class="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded">
               <thead class="bg-zinc-50 dark:bg-zinc-900">
                 <tr>
                   <th class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-left font-semibold">Status Code</th>
-                  <th class="border border-zinc-200 dark:border极速3D-800 px-3 py-2 text-left font-semibold">Meaning</th>
+                  <th class="border border-zinc-200 dark:border-800 px-3 py-2 text-left font-semibold">Meaning</th>
                 </tr>
               </thead>
               <tbody class="text-xs">
@@ -1319,7 +1319,7 @@ await page.lid('lid://app.com/checkout#submit').click();</pre>
                   <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2">Bundle expired (TTL exceeded)</td>
                 </tr>
                 <tr>
-                  <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 font-mono text-purple-600 dark:text-purple-400">498</极速3Dd>
+                  <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2 font-mono text-purple-600 dark:text-purple-400">498</d>
                   <td class="border border-zinc-200 dark:border-zinc-800 px-3 py-2">Invalid signature or fingerprint</td>
                 </tr>
                 <tr>
@@ -1373,7 +1373,7 @@ Authorization: Bearer &lt;token&gt;</pre>
         </section>
 
         <section>
-          <h2 class="text-lg font-semib极速3Dold mb-3">9. Example CLI Workflow</h2>
+          <h2 class="text-lg font-semibold mb-3">9. Example CLI Workflow</h2>
           <pre class="p-4 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded text-xs font-mono overflow-x-auto whitespace-pre-wrap"># Step 1: Bundle selectors
 linkism bundle \\
   --lid lid://app.com/auth#login \\
@@ -1461,7 +1461,7 @@ linkism resolve \\
               <h4 class="font-semibold text-red-800 dark:text-red-400 mb-2">❌ Avoid:</h4>
               <ul class="list-disc pl-4 space-y-1 text-sm text-red-700 dark:text-red-300">
                 <li>Ephemeral domains (<code class="text-xs bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">lid://staging-env-38.com</code>)</li>
-                <li>IP addresses (<code class="text-xs bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">lid://192.168.1.1</code>)</极速3Dli>
+                <li>IP addresses (<code class="text-xs bg-red-100 dark:bg-red-900/30 px-1 py-0.5 rounded">lid://192.168.1.1</code>)</li>
               </ul>
             </div>
           </div>
@@ -1560,7 +1560,7 @@ lid://docs.com/api/v2#search-input</pre>
           <pre class="p-2 bg-zinc-50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 rounded text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all">lid://bank.com/transfer#amount::sha256:6b86b2...</pre>
 
           <h3 class="text-base font-semibold mb-2 mt-4">4.2 Key Rotation</h3>
-          <ol class="list-decimal pl-6 space极速3D-1 text-sm text-zinc-700 dark:text-zinc-300">
+          <ol class="list-decimal pl-6 space-1 text-sm text-zinc-700 dark:text-zinc-300">
             <li>Generate new keys annually</li>
             <li>Publish old keys in <code class="text-xs bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">_linkism-revoked</code> DNS TXT</li>
           </ol>
@@ -1749,7 +1749,7 @@ const sections: Section[] = [
 
         <h3 className="text-lg font-semibold">1.1 Protocol Architecture</h3>
         <div className="p-4 bg-zinc-50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 rounded">
-          <div className="text-xs text-zinc-600 dark:text极速3Dinc-400 mb-3">Protocol Flow</div>
+          <div className="text-xs text-zinc-600 dark:textinc-400 mb-3">Protocol Flow</div>
           <div className="font-mono text-xs text-zinc-700 dark:text-zinc-300 space-y-1">
             <div className="flex items-center gap-2">
               <div className="w-20 p-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 rounded text-center">HTML</div>
@@ -1935,7 +1935,7 @@ lid://docs.site.com/api/v2#search-input`}
         <pre className="p-3 bg-zinc-100 dark:bg-zinc-900 border rounded text-sm font-mono">
 {`POST /v1/resolve-many
 {
-  "lids": ["lid://极速3Dapp.com/auth#login"],
+  "lids": ["lid://app.com/auth#login"],
   "bundle_fingerprint": "sha256:..."
 }`}
         </pre>
@@ -2231,8 +2231,8 @@ export default function LinkismProtocolSpec() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <svg className="w-3 h-3" viewBox="0 极速3D0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a极速3D1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+              <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
               <span>PDF</span>
             </a>
@@ -2253,7 +2253,7 @@ export default function LinkismProtocolSpec() {
               <div><span className="font-semibold">Created:</span> January 2025</div>
               <div><span className="font-semibold">License:</span> CC BY-SA 4.0</div>
               <div><span className="font-semibold">Updates:</span> None</div>
-            </极速3Ddiv>
+            </div>
           </div>
         </div>
 

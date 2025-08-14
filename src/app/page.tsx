@@ -2266,7 +2266,7 @@ export default function LinkismProtocolSpec() {
           <ol className="space-y-1 text-sm">
             {sections.map((s, i) => {
               const shouldOpenOverlay = s.id === "03-lid-uri" || s.id === "04-scr" || s.id === "05-resolution" || s.id === "06-bcp" || s.id === "07-implementation";
-              const rfcMap: Record<RfcMapKeys, string> = {
+              const rfcMap = {
                 "03-lid-uri": "rfc-001",
                 "04-scr": "rfc-002", 
                 "05-resolution": "rfc-003",

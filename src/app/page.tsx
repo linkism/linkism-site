@@ -2310,7 +2310,7 @@ export default function LinkismProtocolSpec() {
               <div><span className="font-semibold">Status:</span> Draft</div>
             </div>
             <div className="space-y-1">
-              <div><span className="font-semibold">Created:</span> January 2025</div>
+              <div><span className="font-semibold">Created:</span> August 2025</div>
               <div><span className="font-semibold">License:</span> CC BY-SA 4.0</div>
               <div><span className="font-semibold">Updates:</span> None</div>
             </div>

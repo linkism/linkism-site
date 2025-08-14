@@ -2287,15 +2287,18 @@ export default function LinkismProtocolSpec() {
                     <span className="flex items-center justify-between">
                       <span>{s.title}</span>
                       {shouldOpenOverlay && (
-                        <span
+                        <button
                           onClick={(e) => {
                             e.stopPropagation(); // Prevent section navigation
                             setSelectedRFC(rfcMap[s.id as keyof typeof rfcMap]); // Open overlay instead
                           }}
-                          className="text-xs px-1.5 py-0.5 ml-2 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded hover:bg-zinc-300 dark:hover:bg-zinc-700"
+                          className="p-1 ml-2 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded transition-colors"
+                          aria-label="View detailed specification"
                         >
-                          View RFC
-                        </span>
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
                       )}
                     </span>
                   </button>

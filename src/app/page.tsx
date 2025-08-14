@@ -2280,11 +2280,11 @@ export default function LinkismProtocolSpec() {
         <div className="mx-auto max-w-4xl px-6 py-4 flex items-baseline justify-between">
           <div>
             <div className="text-sm tracking-wide font-semibold">Linkism Protocol</div>
-            <div className="text-xs text-zinc-500 mt-0.5"></div>
+            <div className="text-xs text-zinc-500 mt-0.5">Persistent Element Identity for the Web</div>
           </div>
           <div className="flex items-center space-x-4 text-xs text-zinc-500">
             <span className="font-mono text-green-600 dark:text-green-400">RFC Suite v1.0</span>
-            <span className="text-zinc-400">Mar 2025</span>
+            <span className="text-zinc-400">Aug 2025</span>
             <a
               href="/linkism-protocol-v1.pdf?v=1.0"
               className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:underline decoration-dotted"

@@ -2413,8 +2413,6 @@ export default function LinkismProtocolSpec() {
                   </span>
                 </button>
               </li>
-              <li><a className="underline decoration-dotted hover:no-underline" href="/conformance">Conformance Test Suite</a></li>
-              <li><a className="underline decoration-dotted hover:no-underline" href="/examples">Integration Examples</a></li>
             </ul>
           </Accordion>
           <Accordion label="lid://protocol/community">

@@ -12,9 +12,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata: Metadata = {
   title: "Linkism Protocol",
-  description: "Persistent Element Identity for the Web",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },               // ICO
+      { url: "/icon.svg", type: "image/svg+xml" },         // optional
+    ],
+    apple: "/apple-touch-icon.png",                        // optional
+  },
 };
 
 export default function RootLayout({

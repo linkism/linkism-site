@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "RFC Spec v1.0 – Persistent UI element identity. No more brittle selectors.",
   openGraph: {
     title: "Linkism Protocol - Persistent UI Element Identity",
-    description: "RFC Spec v1.0 – Solve brittle selectors with lid:// addresses that survive redesigns, framework migrations, and DOM changes.",
+    description: "RFC Spec v1.0 – Solve brittle selectors with lid:// addresses that survive redesigns and framework changes.",
     url: "https://linkism.org",
     siteName: "Linkism Protocol",
     images: [

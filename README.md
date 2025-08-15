@@ -56,7 +56,7 @@ File Structure
 │   ├── data/            # RFC content and metadata
 │   └── styles/          # Tailwind config and globals
 ├── public/              # Static PDFs, images, favicon
-├── linkism-protocol-suite.pdf
+├── linkism-protocol-spec.pdf
 └── README.md
 
 

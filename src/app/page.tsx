@@ -2417,11 +2417,28 @@ export default function LinkismProtocolSpec() {
           </Accordion>
           <Accordion label="lid://protocol/community">
             <ul className="space-y-2">
-              <li><a className="underline decoration-dotted hover:no-underline" href="https://github.com/linkism-rfcs" target="_blank" rel="noopener noreferrer">RFCs on GitHub</a></li>
-              <li><a className="underline decoration-dotted hover:no-underline" href="/discuss">Protocol Discussions</a></li>
-              <li><a className="underline decoration-dotted hover:no-underline" href="/contributing">Contributing Guidelines</a></li>
+              <li>
+                <a 
+                  className="underline decoration-dotted hover:no-underline" 
+                  href="https://github.com/linkism/linkism-site/discussions" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Protocol Discussions
+                </a>
+              </li>
+              <li>
+                <a 
+                  className="underline decoration-dotted hover:no-underline" 
+                  href="https://github.com/linkism/linkism-site/issues" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Report Issues
+                </a>
+              </li>
             </ul>
-          </Accordion>
+        </Accordion>
           
           <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500">
             © {year} Linkism Protocol — Open specification, royalty-free implementation
